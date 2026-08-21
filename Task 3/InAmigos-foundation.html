@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>InAmigos Foundation — Together, We Build</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ivory:#FBF6EC;
+    --ivory-deep:#F3ECDC;
+    --forest:#1E3A2B;
+    --forest-deep:#12241A;
+    --marigold:#E8A33D;
+    --clay:#B2472A;
+    --charcoal:#2A2620;
+    --sage:#A9BFA0;
+    --sage-line: rgba(30,58,43,0.18);
+    --radius: 4px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ivory);
+    color:var(--charcoal);
+    font-family:'Work Sans', sans-serif;
+    font-weight:400;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,h4{font-family:'Fraunces', serif; color:var(--forest-deep); line-height:1.1; font-weight:600;}
+  a{color:inherit; text-decoration:none;}
+  .label{
+    font-family:'Space Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--clay);
+  }
+  .wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
+  img{display:block; max-width:100%; height:auto;}
+
+  /* Thread signature divider */
+  .thread{
+    width:100%; height:28px;
+    background-image: radial-gradient(circle, var(--marigold) 2.5px, transparent 2.6px);
+    background-size: 22px 22px;
+    background-position: center;
+    opacity:0.55;
+  }
+  .thread.dark{ background-image: radial-gradient(circle, var(--sage) 2.5px, transparent 2.6px); opacity:0.35;}
+
+  /* ===== NAV ===== */
+  header{
+    position:sticky; top:0; z-index:100;
+    background:rgba(251,246,236,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom:1px solid var(--sage-line);
+  }
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 32px; max-width:1180px; margin:0 auto;
+  }
+  .logo{
+    display:flex; align-items:center; gap:10px;
+    font-family:'Fraunces', serif; font-weight:700; font-size:1.35rem; color:var(--forest-deep);
+  }
+  .logo-mark{
+    width:34px; height:34px; border-radius:50%;
+    background: conic-gradient(var(--marigold), var(--clay), var(--forest), var(--marigold));
+    display:flex; align-items:center; justify-content:center;
+  }
+  .logo-mark::after{
+    content:""; width:16px; height:16px; border-radius:50%; background:var(--ivory);
+  }
+  .nav-links{display:flex; gap:32px; align-items:center;}
+  .nav-links a{
+    font-size:0.92rem; font-weight:500; color:var(--forest-deep);
+    position:relative; padding:4px 0;
+  }
+  .nav-links a::after{
+    content:""; position:absolute; left:0; bottom:0; width:0; height:2px;
+    background:var(--clay); transition:width 0.25s ease;
+  }
+  .nav-links a:hover::after{width:100%;}
+  .btn{
+    display:inline-block; padding:11px 24px; border-radius:var(--radius);
+    font-weight:600; font-size:0.88rem; letter-spacing:0.02em;
+    border:1.5px solid transparent; cursor:pointer; transition:all 0.2s ease;
+  }
+  .btn-primary{background:var(--clay); color:var(--ivory);}
+  .btn-primary:hover{background:#93381f;}
+  .btn-outline{border-color:var(--forest-deep); color:var(--forest-deep);}
+  .btn-outline:hover{background:var(--forest-deep); color:var(--ivory);}
+  .btn-light{background:var(--ivory); color:var(--forest-deep);}
+  .btn-light:hover{background:var(--marigold); color:var(--forest-deep);}
+  .mobile-toggle{display:none; font-size:1.6rem; background:none; border:none; color:var(--forest-deep); cursor:pointer;}
+
+  /* ===== HERO ===== */
+  .hero{
+    padding:80px 32px 60px;
+    display:grid; grid-template-columns: 1.05fr 0.95fr; gap:56px; align-items:center;
+    max-width:1180px; margin:0 auto;
+  }
+  .hero h1{font-size:3.3rem; margin:16px 0 22px; letter-spacing:-0.01em;}
+  .hero h1 em{font-style:italic; color:var(--clay);}
+  .hero p.lead{font-size:1.08rem; max-width:480px; color:#4a453c; margin-bottom:32px;}
+  .hero-ctas{display:flex; gap:16px; flex-wrap:wrap;}
+  .hero-image{position:relative;}
+  .hero-image .frame{
+    border:2px dashed var(--marigold); border-radius:6px; padding:14px;
+  }
+  .hero-image img{border-radius:4px; width:100%; height:420px; object-fit:cover;}
+  .hero-badge{
+    position:absolute; bottom:-24px; left:-24px; background:var(--forest-deep); color:var(--ivory);
+    padding:16px 20px; border-radius:6px; box-shadow:0 12px 30px rgba(18,36,26,0.35);
+    max-width:220px;
+  }
+  .hero-badge .num{font-family:'Fraunces',serif; font-size:1.8rem; color:var(--marigold); font-weight:700;}
+  .hero-badge .cap{font-size:0.78rem; color:var(--sage); margin-top:2px;}
+
+  /* ===== STATS STRIP ===== */
+  .stats{
+    background:var(--forest-deep); color:var(--ivory);
+    padding:44px 32px; margin-top:64px;
+  }
+  .stats-grid{
+    max-width:1180px; margin:0 auto; display:grid; grid-template-columns:repeat(4,1fr); gap:24px; text-align:center;
+  }
+  .stats-grid .stat-num{font-family:'Fraunces',serif; font-size:2.4rem; color:var(--marigold); font-weight:700;}
+  .stats-grid .stat-cap{font-family:'Space Mono',monospace; font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--sage); margin-top:6px;}
+
+  /* ===== SECTION GENERIC ===== */
+  section{padding:90px 32px;}
+  .section-head{max-width:640px; margin-bottom:52px;}
+  .section-head .label{margin-bottom:12px; display:block;}
+  .section-head h2{font-size:2.3rem;}
+  .section-head p{color:#4a453c; margin-top:14px; font-size:1.02rem;}
+
+  /* ===== ABOUT ===== */
+  .about{background:var(--ivory-deep);}
+  .about-grid{
+    display:grid; grid-template-columns: 0.85fr 1.15fr; gap:60px; align-items:start; max-width:1180px; margin:0 auto;
+  }
+  .about-img-stack{position:relative;}
+  .about-img-stack img{border-radius:4px; height:300px; object-fit:cover;}
+  .about-img-stack img:first-child{width:88%;}
+  .about-img-stack img:last-child{
+    width:60%; position:absolute; bottom:-40px; right:-20px; height:180px;
+    border:6px solid var(--ivory-deep);
+  }
+  .badges{display:flex; flex-wrap:wrap; gap:10px; margin-top:36px;}
+  .badge{
+    font-family:'Space Mono',monospace; font-size:0.72rem; letter-spacing:0.04em;
+    border:1px solid var(--sage-line); padding:8px 14px; border-radius:20px; color:var(--forest-deep);
+    background:var(--ivory);
+  }
+  .about-text p{margin-bottom:18px; color:#4a453c;}
+
+  /* ===== PROGRAMS ===== */
+  .programs-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:28px; max-width:1180px; margin:0 auto;
+  }
+  .program-card{
+    background:var(--ivory); border:1px solid var(--sage-line); border-radius:6px; overflow:hidden;
+    transition:transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .program-card:hover{transform:translateY(-6px); box-shadow:0 18px 40px rgba(30,58,43,0.12);}
+  .program-card img{height:190px; width:100%; object-fit:cover;}
+  .program-body{padding:22px 22px 26px;}
+  .program-body .label{margin-bottom:8px; display:block;}
+  .program-body h3{font-size:1.25rem; margin-bottom:8px;}
+  .program-body p{font-size:0.92rem; color:#4a453c;}
+
+  /* ===== SPOTLIGHT ===== */
+  .spotlight{background:var(--forest-deep); color:var(--ivory);}
+  .spotlight .section-head p{color:var(--sage);}
+  .spotlight .section-head h2{color:var(--ivory);}
+  .spotlight-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center; max-width:1180px; margin:0 auto;
+  }
+  .spotlight-grid img{border-radius:6px; height:380px; object-fit:cover; width:100%;}
+  .spotlight-text p{color:#cfe0d3; margin-bottom:20px;}
+  .spotlight-quote{
+    border-left:3px solid var(--marigold); padding-left:18px; font-style:italic; font-family:'Fraunces',serif;
+    font-size:1.15rem; color:var(--ivory); margin:24px 0;
+  }
+
+  /* ===== TESTIMONIALS ===== */
+  .testimonials-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:28px; max-width:1180px; margin:0 auto;
+  }
+  .t-card{
+    background:var(--ivory-deep); border-radius:6px; padding:28px; border-top:3px solid var(--marigold);
+  }
+  .t-card p.quote{font-family:'Fraunces',serif; font-style:italic; font-size:1.02rem; margin-bottom:18px; color:var(--forest-deep);}
+  .t-person{display:flex; align-items:center; gap:12px;}
+  .t-avatar{width:42px; height:42px; border-radius:50%; object-fit:cover;}
+  .t-name{font-weight:600; font-size:0.9rem;}
+  .t-role{font-size:0.78rem; color:var(--clay);}
+
+  /* ===== GET INVOLVED ===== */
+  .involve-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:28px; max-width:1180px; margin:0 auto;
+  }
+  .involve-card{
+    padding:32px 26px; border-radius:6px; background:var(--ivory);
+    border:1px solid var(--sage-line);
+  }
+  .involve-card .icon{
+    width:48px; height:48px; border-radius:50%; background:var(--marigold); margin-bottom:20px;
+    display:flex; align-items:center; justify-content:center; font-family:'Fraunces',serif; font-weight:700; color:var(--forest-deep); font-size:1.3rem;
+  }
+  .involve-card h3{font-size:1.2rem; margin-bottom:10px;}
+  .involve-card p{color:#4a453c; font-size:0.92rem; margin-bottom:20px;}
+
+  /* ===== CONTACT ===== */
+  .contact{background:var(--ivory-deep);}
+  .contact-grid{
+    display:grid; grid-template-columns:0.9fr 1.1fr; gap:56px; max-width:1180px; margin:0 auto;
+  }
+  .contact-info-item{margin-bottom:26px;}
+  .contact-info-item .label{margin-bottom:6px; display:block;}
+  .contact-info-item div{font-size:1rem; color:var(--forest-deep); font-weight:500;}
+  form{background:var(--ivory); padding:36px; border-radius:6px; border:1px solid var(--sage-line);}
+  .form-row{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;}
+  .form-group{margin-bottom:16px;}
+  label{font-size:0.82rem; font-weight:500; margin-bottom:6px; display:block; color:var(--forest-deep);}
+  input, textarea{
+    width:100%; padding:12px 14px; border:1.5px solid var(--sage-line); border-radius:4px;
+    font-family:'Work Sans', sans-serif; font-size:0.95rem; background:var(--ivory);
+    color: var(--charcoal);
+  }
+  input:focus, textarea:focus{outline:none; border-color:var(--clay);}
+  textarea{resize:vertical; min-height:110px;}
+  form .btn{width:100%; margin-top:6px;}
+
+  /* ===== FOOTER ===== */
+  footer{background:var(--forest-deep); color:var(--sage); padding:60px 32px 28px;}
+  .footer-grid{
+    max-width:1180px; margin:0 auto; display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:40px;
+    padding-bottom:36px; border-bottom:1px solid rgba(169,191,160,0.2);
+  }
+  footer h4{color:var(--ivory); font-size:1rem; margin-bottom:16px; font-family:'Work Sans',sans-serif; font-weight:600;}
+  .footer-logo{font-family:'Fraunces',serif; font-size:1.3rem; color:var(--ivory); font-weight:700; margin-bottom:12px;}
+  footer p{font-size:0.88rem; line-height:1.7;}
+  .footer-links a{display:block; font-size:0.88rem; margin-bottom:10px; color:var(--sage);}
+  .footer-links a:hover{color:var(--marigold);}
+  .footer-bottom{
+    max-width:1180px; margin:24px auto 0; display:flex; justify-content:space-between; align-items:center;
+    font-size:0.8rem; flex-wrap:wrap; gap:12px;
+  }
+  .socials{display:flex; gap:14px;}
+  .socials a{
+    width:34px; height:34px; border-radius:50%; border:1px solid rgba(169,191,160,0.3);
+    display:flex; align-items:center; justify-content:center; font-size:0.78rem;
+  }
+  .socials a:hover{background:var(--marigold); color:var(--forest-deep); border-color:var(--marigold);}
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 900px){
+    .nav-links{display:none;}
+    .mobile-toggle{display:block;}
+    .hero{grid-template-columns:1fr; padding-top:48px;}
+    .hero h1{font-size:2.3rem;}
+    .stats-grid{grid-template-columns:repeat(2,1fr); gap:32px;}
+    .about-grid, .spotlight-grid, .contact-grid{grid-template-columns:1fr;}
+    .about-img-stack{margin-bottom:60px;}
+    .programs-grid, .testimonials-grid, .involve-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr 1fr; gap:32px;}
+    .form-row{grid-template-columns:1fr;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo"><span class="logo-mark"></span>InAmigos Foundation</div>
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#about">About Us</a>
+      <a href="#programs">Programs</a>
+      <a href="#impact">Impact</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a href="#contact" class="btn btn-primary">Donate</a>
+    <button class="mobile-toggle">☰</button>
+  </nav>
+</header>
+
+<!-- ===== HERO ===== -->
+<section id="home" class="hero" style="padding-bottom:0;">
+  <div class="hero-copy">
+    <span class="label">Section 8 · Registered Non-Profit · Est. 2019</span>
+    <h1>Small acts, <em>stitched together</em>, change everything.</h1>
+    <p class="lead">InAmigos Foundation works alongside communities across India on education, women's empowerment, environment, and everyday dignity — one neighbourhood at a time.</p>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn btn-primary">Donate Now</a>
+      <a href="#programs" class="btn btn-outline">See Our Work</a>
+    </div>
+  </div>
+  <div class="hero-image">
+    <div class="frame">
+      <img src="images/3.webp" alt="Children learning together in a classroom">
+    </div>
+    <div class="hero-badge">
+      <div class="num">15,000+</div>
+      <div class="cap">Lives touched across 10 states</div>
+    </div>
+  </div>
+</section>
+
+<div class="thread"></div>
+
+<!-- ===== STATS ===== -->
+<div class="stats" id="impact">
+  <div class="stats-grid">
+    <div><div class="stat-num">2019</div><div class="stat-cap">Founded</div></div>
+    <div><div class="stat-num">200+</div><div class="stat-cap">Active Volunteers</div></div>
+    <div><div class="stat-num">10</div><div class="stat-cap">States Reached</div></div>
+    <div><div class="stat-num">6</div><div class="stat-cap">Core Programs</div></div>
+  </div>
+</div>
+
+<!-- ===== ABOUT ===== -->
+<section class="about" id="about">
+  <div class="about-grid">
+    <div class="about-img-stack">
+      <img src="images/1.png" alt="Volunteers working together outdoors">
+      <img src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=500&q=80" alt="Hands joined together in support">
+    </div>
+    <div class="about-text">
+      <span class="label">About Us</span>
+      <h2 style="font-size:2.1rem; margin:14px 0 20px;">Built by volunteers, run for communities.</h2>
+      <p>InAmigos Foundation began in 2019 with a handful of college volunteers distributing books in a village outside Bilaspur. Today we run six programs across ten states — but the model hasn't changed: show up, listen first, and build what the community actually asks for.</p>
+      <p>We're a registered Section 8 non-profit, which means every rupee we raise is accounted for and every partnership goes through proper compliance — so donors and partners can trust exactly where support lands.</p>
+      <div class="badges">
+        <span class="badge">Section 8 Registered</span>
+        <span class="badge">80G &amp; 12A Certified</span>
+        <span class="badge">CSR-1 Registered</span>
+        <span class="badge">ISO 9001:2015</span>
+        <span class="badge">NITI Aayog Listed</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROGRAMS ===== -->
+<section id="programs">
+  <div class="section-head">
+    <span class="label">What We Do</span>
+    <h2>Six programs, one goal.</h2>
+    <p>Every initiative is designed with the community it serves, not for it — from classrooms to kitchens to forest patches.</p>
+  </div>
+  <div class="programs-grid">
+    <div class="program-card">
+      <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=600&q=80" alt="Rural school children studying">
+      <div class="program-body">
+        <span class="label">Shiksha</span>
+        <h3>Education</h3>
+        <p>After-school learning centres, study material, and mentorship for children who'd otherwise have neither the books nor the time.</p>
+      </div>
+    </div>
+    <div class="program-card">
+      <img src="https://images.unsplash.com/photo-1573497491765-dccce02b29df?auto=format&fit=crop&w=600&q=80" alt="Women in a vocational skills workshop">
+      <div class="program-body">
+        <span class="label">Udaan</span>
+        <h3>Women Empowerment</h3>
+        <p>Vocational training, financial literacy, and small-business support so women build income on their own terms.</p>
+      </div>
+    </div>
+    <div class="program-card">
+      <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=600&q=80" alt="Volunteers planting saplings">
+      <div class="program-body">
+        <span class="label">Prakriti</span>
+        <h3>Environment</h3>
+        <p>Tree plantation drives, plastic-free market campaigns, and neighbourhood clean-ups run by local volunteer chapters.</p>
+      </div>
+    </div>
+    <div class="program-card">
+      <img src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=600&q=80" alt="Volunteer caring for a stray animal">
+      <div class="program-body">
+        <span class="label">Sewa</span>
+        <h3>Animal Welfare &amp; Health</h3>
+        <p>Free vaccination camps, rescue support, and basic health check-up drives in underserved neighbourhoods.</p>
+      </div>
+    </div>
+    <div class="program-card">
+      <img src="https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=600&q=80" alt="Food packets being distributed">
+      <div class="program-body">
+        <span class="label">Anna</span>
+        <h3>Food Security</h3>
+        <p>Weekly ration kits and hot-meal drives for families going through an unexpected income shock.</p>
+      </div>
+    </div>
+    <div class="program-card">
+      <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=600&q=80" alt="Young people in a skill training session">
+      <div class="program-body">
+        <span class="label">Kaushal</span>
+        <h3>Skill Development</h3>
+        <p>Digital literacy and job-readiness workshops for youth transitioning out of school into work.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="thread dark" style="background-color:var(--forest-deep);"></div>
+
+<!-- ===== SPOTLIGHT ===== -->
+<section class="spotlight">
+  <div class="section-head">
+    <span class="label" style="color:var(--marigold);">Featured Program</span>
+    <h2>Project Udaan — teaching flight, not dependence.</h2>
+  </div>
+  <div class="spotlight-grid">
+    <img src="https://images.unsplash.com/photo-1524069290683-0457abfe42c3?auto=format&fit=crop&w=800&q=80" alt="Women participating in Project Udaan training session">
+    <div class="spotlight-text">
+      <p>In its first two years, Project Udaan has trained over 800 women across three districts in tailoring, food processing, and basic bookkeeping — skills that turn into steady weekly income within months, not years.</p>
+      <div class="spotlight-quote">"I used to wait for my husband's wage on Fridays. Now I have my own account, and my own Fridays."</div>
+      <p>We plan to bring Udaan to seven more districts by 2027, working with local self-help groups already trusted by the women we hope to reach.</p>
+      <a href="#contact" class="btn btn-light">Support This Program</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section>
+  <div class="section-head">
+    <span class="label">In Their Words</span>
+    <h2>Stories from the ground.</h2>
+  </div>
+  <div class="testimonials-grid">
+    <div class="t-card">
+      <p class="quote">"InAmigos's after-school centre is the only quiet room my daughter has ever had to study in. That changed her grades — and her confidence."</p>
+      <div class="t-person">
+        <img class="t-avatar" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=100&q=80" alt="Parent portrait">
+        <div><div class="t-name">Meena Sahu</div><div class="t-role">Parent, Bilaspur</div></div>
+      </div>
+    </div>
+    <div class="t-card">
+      <p class="quote">"As a corporate partner, what stood out was how easy it was to see exactly where our CSR funds went — down to the district."</p>
+      <div class="t-person">
+        <img class="t-avatar" src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=100&q=80" alt="Corporate partner portrait">
+        <div><div class="t-name">Rohit Malhotra</div><div class="t-role">CSR Lead, Partner Company</div></div>
+      </div>
+    </div>
+    <div class="t-card">
+      <p class="quote">"I joined as a weekend volunteer three years ago. I now run our entire Prakriti chapter in my city — this place grows you."</p>
+      <div class="t-person">
+        <img class="t-avatar" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80" alt="Volunteer portrait">
+        <div><div class="t-name">Aniket Verma</div><div class="t-role">Volunteer Chapter Lead</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== GET INVOLVED ===== -->
+<section style="padding-top:0;">
+  <div class="section-head">
+    <span class="label">Get Involved</span>
+    <h2>Three ways to help.</h2>
+  </div>
+  <div class="involve-grid">
+    <div class="involve-card">
+      <div class="icon">1</div>
+      <h3>Volunteer</h3>
+      <p>Join a local chapter or contribute remotely — teaching, design, logistics, or fundraising, a few hours a week.</p>
+      <a href="#contact" class="btn btn-outline">Become a Volunteer</a>
+    </div>
+    <div class="involve-card">
+      <div class="icon">2</div>
+      <h3>Donate</h3>
+      <p>Every contribution is 80G tax-exempt. Give once, or set up a monthly gift that funds a specific program.</p>
+      <a href="#contact" class="btn btn-outline">Make a Donation</a>
+    </div>
+    <div class="involve-card">
+      <div class="icon">3</div>
+      <h3>Partner (CSR)</h3>
+      <p>We're CSR-1 registered and work with companies to design and report on high-impact CSR programs.</p>
+      <a href="#contact" class="btn btn-outline">Start a Partnership</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section class="contact" id="contact">
+  <div class="section-head">
+    <span class="label">Contact Page</span>
+    <h2>Let's talk.</h2>
+    <p>Questions about volunteering, donations, or partnerships — reach out and someone from our team will respond within two working days.</p>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <div class="contact-info-item">
+        <span class="label">Address</span>
+        <div>Ward No. 5, Gram Post, Ujwal Nagar,<br>Bilaspur, Chhattisgarh — 495001</div>
+      </div>
+      <div class="contact-info-item">
+        <span class="label">Phone</span>
+        <div>+91 98765 43210</div>
+      </div>
+      <div class="contact-info-item">
+        <span class="label">Email</span>
+        <div>hello@InAmigosfoundation.org</div>
+      </div>
+      <div class="contact-info-item">
+        <span class="label">Office Hours</span>
+        <div>Mon – Sat, 9:30 AM – 6:00 PM IST</div>
+      </div>
+    </div>
+    <form onsubmit="event.preventDefault(); this.querySelector('.btn').textContent='Message Sent ✓';">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" placeholder="Your name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" placeholder="you@example.com" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="subject">Subject</label>
+        <input type="text" id="subject" placeholder="Volunteering, donation, partnership...">
+      </div>
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" placeholder="Tell us a little about what you'd like to do" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Send Message</button>
+    </form>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">InAmigos Foundation</div>
+      <p>A Section 8 non-profit working across education, women's empowerment, environment, and community welfare in India.</p>
+    </div>
+    <div class="footer-links">
+      <h4>Explore</h4>
+      <a href="#home">Home</a>
+      <a href="#about">About Us</a>
+      <a href="#programs">Programs</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="footer-links">
+      <h4>Programs</h4>
+      <a href="#programs">Shiksha — Education</a>
+      <a href="#programs">Udaan — Women</a>
+      <a href="#programs">Prakriti — Environment</a>
+      <a href="#programs">Sewa — Health</a>
+    </div>
+    <div class="footer-links">
+      <h4>Follow</h4>
+      <div class="socials">
+        <a href="#" aria-label="Instagram">IG</a>
+        <a href="#" aria-label="Facebook">FB</a>
+        <a href="#" aria-label="LinkedIn">IN</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2026 InAmigos Foundation. All rights reserved.</div>
+    <div>Registered Section 8 Company · 80G &amp; 12A Certified</div>
+  </div>
+</footer>
+
+</body>
+</html>
