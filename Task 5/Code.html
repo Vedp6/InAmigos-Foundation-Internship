@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roots &amp; Reach — NGO Website Layout</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --forest: #1E3D2B;
+    --forest-deep: #14291D;
+    --ivory: #F5F2EA;
+    --ivory-soft: #EFEADE;
+    --gold: #C7A24C;
+    --gold-deep: #A6832E;
+    --sage: #DCE3D3;
+    --charcoal: #24271F;
+    --charcoal-soft: #5B6157;
+    --line: #CFC9B8;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background: var(--ivory);
+    color: var(--charcoal);
+    font-family: 'Work Sans', sans-serif;
+    line-height: 1.55;
+  }
+  h1,h2,h3{
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    color: var(--forest-deep);
+    letter-spacing: -0.01em;
+  }
+  a{ color: inherit; text-decoration:none; }
+  .wrap{ max-width: 1120px; margin: 0 auto; padding: 0 32px; }
+  section{ padding: 96px 0; }
+  .btn{
+    display:inline-block;
+    padding: 14px 30px;
+    border-radius: 3px;
+    font-family:'Work Sans', sans-serif;
+    font-weight:600;
+    font-size:0.95rem;
+    cursor:pointer;
+    border: 1px solid transparent;
+  }
+  .btn-gold{ background: var(--gold); color: var(--forest-deep); }
+  .btn-outline{ background: transparent; color: var(--ivory); border-color: rgba(245,242,234,0.5); }
+  .btn-outline-dark{ background: transparent; color: var(--forest-deep); border-color: var(--forest-deep); }
+
+  /* ===== NAV ===== */
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 26px 32px; max-width:1120px; margin:0 auto;
+  }
+  .logo{ font-family:'Fraunces', serif; font-size:1.35rem; font-weight:600; color:var(--forest-deep); }
+  .logo span{ color: var(--gold-deep); }
+  .navlinks{ display:flex; gap:36px; font-size:0.92rem; font-weight:500; color: var(--charcoal-soft); }
+  .navlinks a:hover{ color: var(--forest-deep); }
+  .nav-cta{ background: var(--forest); color:var(--ivory); padding:11px 22px; border-radius:3px; font-size:0.9rem; font-weight:600; }
+
+  /* ===== HERO ===== */
+  .hero{
+    background: var(--forest);
+    color: var(--ivory);
+    padding: 88px 0 100px;
+  }
+  .hero .wrap{ display:grid; grid-template-columns: 1.15fr 0.85fr; gap:64px; align-items:center; }
+  .hero-eyebrow{ font-size:0.95rem; color: var(--sage); margin-bottom:18px; }
+  .hero h1{
+    font-size: clamp(2.4rem, 4vw, 3.4rem);
+    line-height:1.08;
+    color: var(--ivory);
+    margin-bottom: 22px;
+  }
+  .hero p{ font-size:1.08rem; color: #D8DECF; max-width: 46ch; margin-bottom:34px; }
+  .hero-actions{ display:flex; gap:16px; }
+  .hero-stats{
+    display:grid; grid-template-columns: 1fr 1fr; gap: 1px;
+    background: rgba(245,242,234,0.15);
+    border: 1px solid rgba(245,242,234,0.2);
+  }
+  .stat-box{ background: var(--forest-deep); padding: 26px 22px; }
+  .stat-num{ font-family:'Fraunces', serif; font-size:2rem; color: var(--gold); }
+  .stat-label{ font-size:0.85rem; color:#C6CEBB; margin-top:4px; }
+
+  /* ===== SECTION HEADER PATTERN ===== */
+  .sec-head{ max-width: 60ch; margin-bottom: 48px; }
+  .sec-tag{ font-size:0.9rem; color: var(--gold-deep); font-weight:600; margin-bottom:10px; }
+  .sec-head h2{ font-size: 2rem; margin-bottom:14px; }
+  .sec-head p{ color: var(--charcoal-soft); font-size:1.02rem; }
+
+  /* ===== DONATION (bold band) ===== */
+  .donation{ background: var(--sage); }
+  .donation .wrap{ display:grid; grid-template-columns: 1fr 1fr; gap:64px; align-items:center; }
+  .donate-card{
+    background: var(--ivory);
+    border: 1px solid var(--line);
+    padding: 36px;
+    border-radius: 4px;
+  }
+  .amount-row{ display:flex; gap:10px; margin: 20px 0 24px; flex-wrap:wrap; }
+  .amount-chip{
+    padding:10px 20px; border:1px solid var(--forest); border-radius:3px;
+    font-weight:600; font-size:0.95rem; color:var(--forest-deep);
+  }
+  .amount-chip.active{ background: var(--forest); color: var(--ivory); }
+  .freq-toggle{ display:flex; gap:0; margin-bottom:20px; border:1px solid var(--forest); border-radius:3px; overflow:hidden; width:max-content; }
+  .freq-toggle div{ padding:9px 20px; font-size:0.88rem; font-weight:600; }
+  .freq-toggle .on{ background:var(--forest); color:var(--ivory); }
+  .freq-toggle .off{ color:var(--forest); }
+  .donate-note{ font-size:0.85rem; color:var(--charcoal-soft); margin-top:14px; }
+
+  /* ===== VOLUNTEER (split form) ===== */
+  .volunteer .wrap{ display:grid; grid-template-columns: 0.9fr 1.1fr; gap:70px; }
+  .vol-list{ list-style:none; margin-top:26px; }
+  .vol-list li{ display:flex; gap:14px; padding: 14px 0; border-top:1px solid var(--line); font-size:0.98rem; }
+  .vol-list li:last-child{ border-bottom:1px solid var(--line); }
+  .vol-num{ font-family:'Fraunces', serif; color: var(--gold-deep); font-size:1.05rem; }
+  .form-card{ background: var(--ivory-soft); border:1px solid var(--line); border-radius:4px; padding:36px; }
+  .field{ margin-bottom:18px; }
+  .field label{ display:block; font-size:0.85rem; font-weight:600; color: var(--charcoal-soft); margin-bottom:6px; }
+  .field input, .field select, .field textarea{
+    width:100%; padding:11px 14px; border:1px solid var(--line); border-radius:3px;
+    font-family:'Work Sans', sans-serif; font-size:0.95rem; background:var(--ivory);
+    color: var(--charcoal);
+  }
+  .field-row{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+
+  /* ===== IMPACT (stat band) ===== */
+  .impact{ background: var(--forest-deep); color: var(--ivory); }
+  .impact .sec-head h2, .impact .sec-tag{ color: var(--ivory); }
+  .impact .sec-tag{ color: var(--gold); }
+  .impact .sec-head p{ color: #C6CEBB; }
+  .impact-grid{ display:grid; grid-template-columns: repeat(4, 1fr); gap:1px; background: rgba(245,242,234,0.15); border:1px solid rgba(245,242,234,0.2); margin-top:12px; }
+  .impact-item{ background: var(--forest-deep); padding: 34px 24px; }
+  .impact-num{ font-family:'Fraunces', serif; font-size: 2.6rem; color: var(--gold); line-height:1; }
+  .impact-label{ margin-top:10px; font-size:0.92rem; color:#C6CEBB; }
+  .impact-bar-wrap{ margin-top: 40px; }
+  .impact-bar-label{ display:flex; justify-content:space-between; font-size:0.88rem; color:#C6CEBB; margin-bottom:8px; }
+  .impact-bar{ height:8px; background: rgba(245,242,234,0.15); border-radius:4px; overflow:hidden; margin-bottom:22px; }
+  .impact-bar-fill{ height:100%; background: var(--gold); }
+
+  /* ===== TESTIMONIALS ===== */
+  .testimonials{ background: var(--ivory); }
+  .quote-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .quote-card{ background: var(--sage); border-radius:4px; padding: 30px 28px; display:flex; flex-direction:column; height:100%; }
+  .quote-mark{ font-family:'Fraunces', serif; font-size: 2.6rem; color: var(--gold-deep); line-height:0.6; margin-bottom:14px; }
+  .quote-text{ font-size:0.98rem; color: var(--charcoal); flex-grow:1; margin-bottom:20px; }
+  .quote-person{ display:flex; align-items:center; gap:12px; }
+  .avatar{ width:42px; height:42px; border-radius:50%; background: var(--forest); color:var(--ivory); display:flex; align-items:center; justify-content:center; font-family:'Fraunces', serif; font-size:1rem; }
+  .quote-name{ font-weight:600; font-size:0.92rem; }
+  .quote-role{ font-size:0.82rem; color: var(--charcoal-soft); }
+
+  /* ===== CAMPAIGNS / EVENTS ===== */
+  .campaigns{ background: var(--ivory-soft); }
+  .camp-list{ display:flex; flex-direction:column; }
+  .camp-row{
+    display:grid; grid-template-columns: 110px 1fr auto; gap: 28px; align-items:center;
+    padding: 26px 0; border-top:1px solid var(--line);
+  }
+  .camp-list .camp-row:last-child{ border-bottom:1px solid var(--line); }
+  .camp-date{ text-align:center; }
+  .camp-day{ font-family:'Fraunces', serif; font-size:1.8rem; color: var(--forest-deep); line-height:1; }
+  .camp-month{ font-size:0.8rem; color: var(--gold-deep); font-weight:600; margin-top:4px; }
+  .camp-title{ font-size:1.1rem; font-family:'Fraunces', serif; color: var(--forest-deep); margin-bottom:6px; }
+  .camp-meta{ font-size:0.86rem; color: var(--charcoal-soft); }
+  .camp-tag{ display:inline-block; font-size:0.75rem; font-weight:600; color: var(--forest-deep); background: var(--sage); padding:4px 10px; border-radius:3px; margin-right:8px; }
+
+  /* ===== CONTACT ===== */
+  .contact{ background: var(--forest); color: var(--ivory); }
+  .contact .wrap{ display:grid; grid-template-columns: 0.9fr 1.1fr; gap:70px; }
+  .contact .sec-tag{ color: var(--gold); }
+  .contact h2{ color: var(--ivory); }
+  .contact-info{ margin-top:26px; }
+  .contact-row{ padding: 16px 0; border-top:1px solid rgba(245,242,234,0.18); font-size:0.95rem; }
+  .contact-row .lbl{ font-size:0.8rem; color:#B9C1AC; margin-bottom:4px; }
+  .contact-form .field label{ color: #D8DECF; }
+  .contact-form .field input, .contact-form .field textarea{ background: var(--forest-deep); border-color: rgba(245,242,234,0.25); color: var(--ivory); }
+
+  /* ===== FOOTER ===== */
+  footer{ background: var(--forest-deep); color: #B9C1AC; padding: 40px 0; font-size:0.85rem; }
+  footer .wrap{ display:flex; justify-content:space-between; align-items:center; }
+
+  /* ===== ANNOTATION LABELS ===== */
+  .annotate{ position:relative; }
+  .anno-tag{
+    position:absolute; top:28px; left:32px;
+    display:flex; align-items:center; gap:10px;
+    padding:7px 14px;
+    background: var(--ivory);
+    border: 1px dashed var(--gold-deep);
+    border-radius: 3px;
+    font-size:0.78rem; font-weight:600;
+    color: var(--forest-deep);
+    z-index:5;
+  }
+  .anno-tag .n{
+    display:inline-flex; align-items:center; justify-content:center;
+    width:18px; height:18px; border-radius:50%;
+    background: var(--gold); color: var(--forest-deep);
+    font-size:0.7rem; font-family:'Work Sans', sans-serif;
+  }
+  .on-dark .anno-tag{ background: var(--forest-deep); border-color: var(--gold); color: var(--ivory); }
+
+  @media (max-width: 860px){
+    .hero .wrap, .donation .wrap, .volunteer .wrap, .contact .wrap{ grid-template-columns: 1fr; }
+    .impact-grid{ grid-template-columns: 1fr 1fr; }
+    .quote-grid{ grid-template-columns: 1fr; }
+    .navlinks{ display:none; }
+    .camp-row{ grid-template-columns: 70px 1fr; }
+    .camp-row > .btn{ grid-column: 1 / -1; width:max-content; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Roots<span>&amp;</span>Reach</div>
+  <div class="navlinks">
+    <a href="#donate">Donate</a>
+    <a href="#volunteer">Volunteer</a>
+    <a href="#impact">Impact</a>
+    <a href="#stories">Stories</a>
+    <a href="#events">Events</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="nav-cta">Donate Now</div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <div class="hero-eyebrow">Community-led rural development</div>
+      <h1>Clean water and steady livelihoods, reaching the villages maps forget.</h1>
+      <p>Roots &amp; Reach works with 40 communities to build wells, train farmers, and keep children in school. Every rupee is tracked, every project reported.</p>
+      <div class="hero-actions">
+        <a class="btn btn-gold" href="#donate">Give a Donation</a>
+        <a class="btn btn-outline" href="#volunteer">Become a Volunteer</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-box"><div class="stat-num">40</div><div class="stat-label">Villages served</div></div>
+      <div class="stat-box"><div class="stat-num">₹2.1Cr</div><div class="stat-label">Raised this year</div></div>
+      <div class="stat-box"><div class="stat-num">1,200+</div><div class="stat-label">Active volunteers</div></div>
+      <div class="stat-box"><div class="stat-num">86%</div><div class="stat-label">Funds to programs</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- 1. DONATION SECTION -->
+<section class="donation annotate" id="donate">
+  <div class="anno-tag"><span class="n">1</span>Donation Section — lets visitors give in a few taps</div>
+  <div class="wrap">
+    <div>
+      <div class="sec-tag">Donation Section</div>
+      <h2>Your gift funds the next well.</h2>
+      <p style="color:var(--charcoal-soft); font-size:1.02rem; margin-bottom:18px;">A one-time gift covers materials; a monthly gift covers upkeep, training, and the staff who make projects last. Choose an amount, choose a frequency, and see exactly where it goes before you give.</p>
+      <ul style="list-style:none; font-size:0.95rem; color:var(--charcoal-soft);">
+        <li style="padding:6px 0;">→ Instant tax receipt emailed to you</li>
+        <li style="padding:6px 0;">→ Option to dedicate a gift in someone's name</li>
+        <li style="padding:6px 0;">→ Quarterly impact report for monthly donors</li>
+      </ul>
+    </div>
+    <div class="donate-card">
+      <div class="freq-toggle">
+        <div class="off">One-time</div>
+        <div class="on">Monthly</div>
+      </div>
+      <div class="amount-row">
+        <div class="amount-chip">₹500</div>
+        <div class="amount-chip active">₹1,500</div>
+        <div class="amount-chip">₹3,000</div>
+        <div class="amount-chip">Custom</div>
+      </div>
+      <div class="field"><label>Full name</label><input type="text" placeholder="As it should appear on your receipt"></div>
+      <div class="field"><label>Email</label><input type="email" placeholder="you@example.com"></div>
+      <a class="btn btn-gold" style="width:100%; text-align:center; display:block;">Donate ₹1,500 / month</a>
+      <div class="donate-note">Secured payment · Cancel anytime</div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. VOLUNTEER REGISTRATION -->
+<section class="volunteer annotate" id="volunteer">
+  <div class="anno-tag"><span class="n">2</span>Volunteer Registration — turns interest into a signed-up volunteer</div>
+  <div class="wrap">
+    <div>
+      <div class="sec-tag">Volunteer Registration</div>
+      <h2>Put a Saturday toward something that lasts.</h2>
+      <p style="color:var(--charcoal-soft); font-size:1.02rem;">Register once and we'll match you to roles near you — no experience required for most positions.</p>
+      <ul class="vol-list">
+        <li><span class="camp-num">01</span> Tell us your skills and availability</li>
+        <li><span class="camp-num">02</span> We match you to a nearby project</li>
+        <li><span class="camp-num">03</span> Attend an orientation session</li>
+        <li><span class="camp-num">04</span> Start volunteering, tracked hours included</li>
+      </ul>
+    </div>
+    <div class="form-card">
+      <div class="field-row">
+        <div class="field"><label>First name</label><input type="text" placeholder="Priya"></div>
+        <div class="field"><label>Last name</label><input type="text" placeholder="Sharma"></div>
+      </div>
+      <div class="field"><label>Phone number</label><input type="tel" placeholder="+91"></div>
+      <div class="field"><label>Area of interest</label>
+        <select>
+          <option>Teaching &amp; tutoring</option>
+          <option>Event support</option>
+          <option>Skilled trades (plumbing, construction)</option>
+          <option>Admin &amp; fundraising</option>
+        </select>
+      </div>
+      <div class="field"><label>Availability</label><input type="text" placeholder="Weekends, 4 hrs/week"></div>
+      <a class="btn btn-outline-dark" style="width:100%; text-align:center; display:block;">Submit Registration</a>
+    </div>
+  </div>
+</section>
+
+<!-- 3. IMPACT SHOWCASE -->
+<section class="impact annotate on-dark" id="impact">
+  <div class="anno-tag"><span class="n">3</span>Impact Showcase — proves donations are working, with numbers</div>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-tag">Impact Showcase</div>
+      <h2>Where the funding actually goes</h2>
+      <p>Real numbers, updated quarterly and audited annually.</p>
+    </div>
+    <div class="impact-grid">
+      <div class="impact-item"><div class="impact-num">128</div><div class="impact-label">Wells built since 2019</div></div>
+      <div class="impact-item"><div class="impact-num">6,400</div><div class="impact-label">Children in school programs</div></div>
+      <div class="impact-item"><div class="impact-num">340</div><div class="impact-label">Farmers trained this year</div></div>
+      <div class="impact-item"><div class="impact-num">86%</div><div class="impact-label">Of funds go directly to programs</div></div>
+    </div>
+    <div class="impact-bar-wrap">
+      <div class="impact-bar-label"><span>Programs</span><span>86%</span></div>
+      <div class="impact-bar"><div class="impact-bar-fill" style="width:86%;"></div></div>
+      <div class="impact-bar-label"><span>Operations</span><span>9%</span></div>
+      <div class="impact-bar"><div class="impact-bar-fill" style="width:9%;"></div></div>
+      <div class="impact-bar-label"><span>Fundraising</span><span>5%</span></div>
+      <div class="impact-bar"><div class="impact-bar-fill" style="width:5%;"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. TESTIMONIALS -->
+<section class="testimonials annotate" id="stories">
+  <div class="anno-tag"><span class="n">4</span>Testimonials — builds trust through real voices</div>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-tag">Testimonials</div>
+      <h2>Told by the people involved</h2>
+      <p>From the families we work with to the volunteers who show up every week.</p>
+    </div>
+    <div class="quote-grid">
+      <div class="quote-card">
+        <div class="quote-mark">"</div>
+        <div class="quote-text">The well near our farm cut a two-hour walk down to ten minutes. My daughters go to school now instead.</div>
+        <div class="quote-person"><div class="avatar">L</div><div><div class="quote-name">Lakshmi Devi</div><div class="quote-role">Resident, Chittapur village</div></div></div>
+      </div>
+      <div class="quote-card">
+        <div class="quote-mark">"</div>
+        <div class="quote-text">I signed up for one Saturday and stayed for two years. The reporting is transparent, which made it easy to keep going.</div>
+        <div class="quote-person"><div class="avatar">A</div><div><div class="quote-name">Arjun Mehta</div><div class="quote-role">Volunteer since 2023</div></div></div>
+      </div>
+      <div class="quote-card">
+        <div class="quote-mark">"</div>
+        <div class="quote-text">The farming training changed our yield within a season. We're now teaching two neighboring villages ourselves.</div>
+        <div class="quote-person"><div class="avatar">R</div><div><div class="quote-name">Ramesh Patil</div><div class="quote-role">Program graduate, 2024</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. CAMPAIGNS & EVENTS -->
+<section class="campaigns annotate" id="events">
+  <div class="anno-tag"><span class="n">5</span>Campaigns &amp; Events — gives people a concrete next action</div>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-tag">Campaigns &amp; Events</div>
+      <h2>Upcoming ways to take part</h2>
+      <p>Fundraisers, on-ground drives, and volunteer days — pick one and show up.</p>
+    </div>
+    <div class="camp-list">
+      <div class="camp-row">
+        <div class="camp-date"><div class="camp-day">14</div><div class="camp-month">SEP</div></div>
+        <div><span class="camp-tag">Fundraiser</span><div class="camp-title">Monsoon Well Drive — Target ₹8L</div><div class="camp-meta">Online · Runs through 30 Sept</div></div>
+        <a class="btn btn-outline-dark">Contribute</a>
+      </div>
+      <div class="camp-row">
+        <div class="camp-date"><div class="camp-day">21</div><div class="camp-month">SEP</div></div>
+        <div><span class="camp-tag">On-ground</span><div class="camp-title">School Supplies Packing Day</div><div class="camp-meta">Pune warehouse · 9 AM – 1 PM</div></div>
+        <a class="btn btn-outline-dark">Join</a>
+      </div>
+      <div class="camp-row">
+        <div class="camp-date"><div class="camp-day">05</div><div class="camp-month">OCT</div></div>
+        <div><span class="camp-tag">Community</span><div class="camp-title">Farmer Training Graduation</div><div class="camp-meta">Chittapur village · Open to visitors</div></div>
+        <a class="btn btn-outline-dark">RSVP</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. CONTACT & SUPPORT -->
+<section class="contact annotate on-dark" id="contact">
+  <div class="anno-tag"><span class="n">6</span>Contact &amp; Support — a clear way to reach the org directly</div>
+  <div class="wrap">
+    <div>
+      <div class="sec-tag">Contact &amp; Support</div>
+      <h2>Questions before you give or volunteer?</h2>
+      <p style="color:#D8DECF; font-size:1.02rem;">Our team replies within one business day.</p>
+      <div class="contact-info">
+        <div class="contact-row"><div class="lbl">Email</div>hello@rootsandreach.org</div>
+        <div class="contact-row"><div class="lbl">Phone</div>+91 20 4567 8901</div>
+        <div class="contact-row"><div class="lbl">Office</div>14 Ganesh Peth, Pune, Maharashtra</div>
+        <div class="contact-row"><div class="lbl">Hours</div>Mon–Sat, 9 AM – 6 PM IST</div>
+      </div>
+    </div>
+    <div class="form-card contact-form" style="background:var(--forest-deep); border-color:rgba(245,242,234,0.2);">
+      <div class="field-row">
+        <div class="field"><label>Name</label><input type="text" placeholder="Your name"></div>
+        <div class="field"><label>Email</label><input type="email" placeholder="you@example.com"></div>
+      </div>
+      <div class="field"><label>Topic</label>
+        <select><option>General question</option><option>Donation support</option><option>Volunteering</option><option>Partnership</option></select>
+      </div>
+      <div class="field"><label>Message</label><textarea rows="4" placeholder="How can we help?"></textarea></div>
+      <a class="btn btn-gold" style="width:100%; text-align:center; display:block;">Send Message</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>© 2026 Roots &amp; Reach Foundation</div>
+    <div>Registered NGO · Annual reports available on request</div>
+  </div>
+</footer>
+
+</body>
+</html>
